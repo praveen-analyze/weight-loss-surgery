@@ -574,43 +574,59 @@
       </ul>
     </div>
     <div class="booking-card reveal">
-      <h3>Request your slot</h3>
-      <p class="form-sub">Have less than a minute.</p>
-      <form id="bookingForm" novalidate>
-        <label>Full name
-          <input type="text" name="name" placeholder="Your name" required>
-        </label>
-        <label>Phone number
-          <input type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required>
-        </label>
-        <label>What are you looking for?
-          <select name="condition" required>
-            <option value="">Select an option</option>
-            <option>Weight loss surgery</option>
-            <option>Bariatric surgery</option>
-            <option>Gastric sleeve</option>
-            <option>Gastric bypass</option>
-            <option>Obesity-related health concerns</option>
-            <option>Bariatric surgery cost</option>
-            <option>Second opinion</option>
-            <option>Other</option>
-          </select>
-        </label>
-        <label>Preferred time
-          <select name="time">
-            <option>Choose a preference</option>
-            <option>Morning</option>
-            <option>Evening (6:00 – 7:00 PM)</option>
-            <option>Any time works</option>
-          </select>
-        </label>
-        <label>Brief message (optional)
-          <textarea name="message" rows="3" placeholder="Tell us about your weight-loss journey and what you would like to understand."></textarea>
-        </label>
-        <p class="form-fine">Your details stay private and are used only to arrange your consultation.</p>
-        <button type="submit" class="btn btn-teal btn-block">Request my consultation</button>
-        <div class="form-success" id="formSuccess" hidden>✓ Request received. The team will call you shortly to confirm your slot.</div>
-      </form>
+      <div id="bookingFormWrapper">
+        <h3>Request your slot</h3>
+        <p class="form-sub">Have less than a minute.</p>
+        <form id="bookingForm" novalidate>
+          <label>Full name
+            <input type="text" name="name" placeholder="Your name" required>
+          </label>
+          <label>Phone number
+            <input type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required>
+          </label>
+          <label>What are you looking for?
+            <select name="condition" required>
+              <option value="">Select an option</option>
+              <option>Weight loss surgery</option>
+              <option>Bariatric surgery</option>
+              <option>Gastric sleeve</option>
+              <option>Gastric bypass</option>
+              <option>Obesity-related health concerns</option>
+              <option>Bariatric surgery cost</option>
+              <option>Second opinion</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label>Preferred time
+            <select name="time">
+              <option>Choose a preference</option>
+              <option>Morning</option>
+              <option>Evening (6:00 – 7:00 PM)</option>
+              <option>Any time works</option>
+            </select>
+          </label>
+          <label>Brief message (optional)
+            <textarea name="message" rows="3" placeholder="Tell us about your weight-loss journey and what you would like to understand."></textarea>
+          </label>
+          <p class="form-fine">Your details stay private and are used only to arrange your consultation.</p>
+          <button type="submit" class="btn btn-teal btn-block">Request my consultation</button>
+          <div class="form-success" id="formSuccess" hidden>✓ Request received. The team will call you shortly to confirm your slot.</div>
+        </form>
+      </div>
+
+      <div class="thank-you-card" id="thankYouCard" hidden>
+        <div class="tick-wrapper">
+          <div class="tick-circle">
+            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+              <circle class="checkmark__circle" cx="26" cy="26" r="23" fill="none"/>
+              <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+            </svg>
+          </div>
+        </div>
+        <h3>Thank You!</h3>
+        <p class="thank-you-msg">Your consultation request has been submitted successfully. Our team will call you shortly to confirm your slot.</p>
+        <button type="button" class="btn btn-outline btn-block" id="resetFormBtn" style="margin-top:24px">Book Another Slot</button>
+      </div>
       <div class="alt-actions">
         <a class="btn btn-outline btn-half" href="#" rel="noopener">💬 WhatsApp us</a>
         <a class="btn btn-outline btn-half" href="tel:+919884000171">📞 Call now</a>

@@ -70,6 +70,10 @@ setInterval(() => {
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzMS3EgX_tJzAEC8aWG_jMipLA9QY_UTGu6baPkaVWOpl9RzBRQ87ikDD7ODNP2a-Jn/exec';
 
 const form = document.getElementById('bookingForm');
+const bookingFormWrapper = document.getElementById('bookingFormWrapper');
+const thankYouCard = document.getElementById('thankYouCard');
+const resetFormBtn = document.getElementById('resetFormBtn');
+
 if (form) {
   form.addEventListener('submit', e => {
     e.preventDefault();
@@ -89,7 +93,10 @@ if (form) {
     }
 
     const submitBtn = form.querySelector('button[type="submit"]');
-    if (submitBtn) submitBtn.disabled = true;
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+    }
 
     const body = new FormData();
     body.append('name', name);
@@ -103,7 +110,23 @@ if (form) {
     // fetch (no network error) as success.
     fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body })
       .then(() => {
-        document.getElementById('formSuccess').hidden = false;
+        if (bookingFormWrapper && thankYouCard) {
+          bookingFormWrapper.hidden = true;
+          thankYouCard.hidden = false;
+          // Restart checkmark animation cleanly
+          const checkmark = thankYouCard.querySelector('.checkmark');
+          const checkmarkCircle = thankYouCard.querySelector('.checkmark__circle');
+          const checkmarkCheck = thankYouCard.querySelector('.checkmark__check');
+          [checkmark, checkmarkCircle, checkmarkCheck].forEach(el => {
+            if (el) {
+              el.style.animation = 'none';
+              el.offsetHeight; /* trigger reflow */
+              el.style.animation = '';
+            }
+          });
+        } else {
+          document.getElementById('formSuccess').hidden = false;
+        }
         form.reset();
       })
       .catch(err => {
@@ -111,8 +134,20 @@ if (form) {
         alert('Could not send your request. Please check your connection and try again.');
       })
       .finally(() => {
-        if (submitBtn) submitBtn.disabled = false;
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Request my consultation';
+        }
       });
+  });
+}
+
+if (resetFormBtn) {
+  resetFormBtn.addEventListener('click', () => {
+    if (bookingFormWrapper && thankYouCard) {
+      thankYouCard.hidden = true;
+      bookingFormWrapper.hidden = false;
+    }
   });
 }
 
